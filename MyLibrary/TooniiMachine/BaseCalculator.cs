@@ -7,7 +7,7 @@ using Calculator.Interface;
 using Calculator.SanahOi;
 namespace Calculator.MainCalculator
 {
-    class BaseCalculator : Calculator, IOperation
+    public class BaseCalculator : Calculator, IOperation
     {
         public Memory memory;
         public BaseCalculator()

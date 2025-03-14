@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.MainCalculator
 {
-    abstract class Calculator
+    public abstract class Calculator
     {
         public int Result {  get; set; }
     }
