@@ -12,6 +12,8 @@ namespace TestProject
             baseCalculator.subtruct(90);
             baseCalculator.add(12);
             Assert.AreEqual(-78, baseCalculator.Result);
+            baseCalculator.ClearResult();
+            Assert.AreEqual(0, baseCalculator.Result);
         }
         [TestMethod]
         public void MemorySaveAndRemoveTests()

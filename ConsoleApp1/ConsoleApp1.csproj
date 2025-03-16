@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MyLibrary\MyLibrary.csproj" />
+    <ProjectReference Include="..\WindowsFormsControlLibrary\WindowsFormsControlLibrary.csproj" />
   </ItemGroup>
 
 </Project>

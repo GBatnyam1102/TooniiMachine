@@ -15,6 +15,10 @@ namespace Calculator.MainCalculator
             memory = new Memory();
             Result = 0;
         }
+        public void ClearResult()
+        {
+            Result = 0;
+        }
         public int add(int value)
         {
             return Result += value;
