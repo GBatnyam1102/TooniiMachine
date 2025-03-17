@@ -8,6 +8,7 @@ namespace Calculator.SanahOi
 {
     public class Memory
     {
+        
         public List<MemoryItem> memoryItems;
         public Memory()
         {

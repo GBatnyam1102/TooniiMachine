@@ -21,10 +21,10 @@ namespace WindowsFormsControlLibrary
         {
             InitializeComponent();
         }
-        public void ChangeLabelText(BaseCalculator calculator)
+        public void ChangeLabelText(String text)
         {
-            this.OneItem.Text = calculator.Result.ToString();
-            result = calculator.Result;
+            this.OneItem.Text = text;
+            result = int.Parse(text);
         }
 
         private void MemoryItemRemove_Click(object sender, EventArgs e)

@@ -11,7 +11,8 @@ namespace CalculateForm
         public bool isEqualButt = false;
         public string undsenUtga = "";
         public string useEqualbut = "0";
-
+        public int EqualButtonClickNum = 0;
+        public bool TextChange = false;
         BaseCalculator calculator = new BaseCalculator();
         public Form1()
         {
@@ -24,25 +25,30 @@ namespace CalculateForm
         private void MemorySaveButton_Click(object sender, EventArgs e)
         {
             MemoryOneItem memoryOneItem = new MemoryOneItem();
-            memoryOneItem.ChangeLabelText(calculator);
+            memoryOneItem.ChangeLabelText(calculator.Result.ToString());
             flowLayoutPanel1.Controls.Add(memoryOneItem);
         }
 
         private void Number_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            if (button != null && isOp == false)
+            if (button != null)
             {
-                textBox1.Text += button.Text;
-                undsenUtga += button.Text;
+                if (isOp)
+                {
+                    textBox1.Text = button.Text;
+                    undsenUtga = button.Text;
+                    isOp = false;
+                }
+                else
+                {
+                    textBox1.Text += button.Text;
+                    undsenUtga += button.Text;
+                }
+                isNumber = true;
             }
-            else
-            {
-                undsenUtga += button.Text;
-                textBox1.Text = undsenUtga;
-            }
-            isNumber = true;
         }
+
 
         private void AddButton_Click(object sender, EventArgs e)
         {
@@ -80,43 +86,54 @@ namespace CalculateForm
             if (button1 != null)
             {
                 calculator.ClearResult();
-                textBox1.Text = calculator.Result.ToString();
+                textBox1.Text = "";
                 useEqualbut = "0";
                 undsenUtga = "";
+                EqualButtonClickNum = 0;
             }
         }
 
         private void Equalbutton_Click(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-            if (button != null)
+            if (!string.IsNullOrEmpty(textBox1.Text))
             {
-                if (!isEqualButt)
+                int lastNumber = int.Parse(textBox1.Text);
+                if(EqualButtonClickNum == 0)
                 {
-                    if (isadd)
+                    if(isadd)
                     {
-                        calculator.Result += int.Parse(textBox1.Text);
+                        calculator.Result += lastNumber;
                     }
                     else
                     {
-                        calculator.Result -= int.Parse(textBox1.Text);
+                        calculator.Result -= lastNumber;
                     }
+                    EqualButtonClickNum++;
                 }
                 else
                 {
-                    if (isadd)
+                    if (!isEqualButt)
                     {
-                        calculator.Result += int.Parse(useEqualbut);
+                        if (isadd)
+                            calculator.Result += lastNumber;
+                        else
+                            calculator.Result -= lastNumber;
+                        useEqualbut = lastNumber.ToString();
                     }
                     else
                     {
-                        calculator.Result -= int.Parse(useEqualbut);
+                        if (isadd)
+                            calculator.Result += int.Parse(useEqualbut);
+                        else
+                            calculator.Result -= int.Parse(useEqualbut);
                     }
                 }
+                
                 textBox1.Text = calculator.Result.ToString();
+                isEqualButt = true;
+                undsenUtga = "";
             }
-            isEqualButt = true;
-
         }
+
     }
 }
